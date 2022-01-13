@@ -1,0 +1,13 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: go-places
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: go-places
+spec:
+  source:
+    git:
+      url: https://github.com/pvdbleek/go-places
+      ref:
+        branch: main
