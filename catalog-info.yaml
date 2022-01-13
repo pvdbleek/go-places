@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: go-places
+  description: Places API written in Go
+  tags:
+    - golang
+    - web
+    - tanzu
+  annotations:
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=go-places'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: tanzu-se-team
