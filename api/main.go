@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -64,12 +63,11 @@ func getMapsUrlByID(c *gin.Context) {
 
 	for _, MapCoordinates := range places {
 		if MapCoordinates.ID == id {
-			//c.IndentedJSON(http.StatusOK, a.Lat, a.Lon)
 			UrlLat := strconv.FormatFloat(MapCoordinates.Lat, 'f', -1, 64)
 			UrlLon := strconv.FormatFloat(MapCoordinates.Lon, 'f', -1, 64)
 			Url := "https://maps.google.com/maps?q=" + UrlLat + "," + UrlLon
+
 			c.PureJSON(http.StatusOK, gin.H{"mapsurl": Url + "&t=k"})
-			fmt.Print(Url)
 			return
 		}
 	}
