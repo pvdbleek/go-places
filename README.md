@@ -75,3 +75,9 @@ curl http://go-places.default.192.168.64.6.nip.io/places \
     --request "POST" \
     --data '{"id": "3","name": "Heaven's Gate","country": "China","description": "A stairway to heaven on Tianmen Mountain","latitude": 29.053743429510085,"longitude": 110.48154034958873}'
 ```
+
+## Known issue(s)
+
+Any POSTs you make are only persisted in memory, so it doesn't run nicely in knative yet. Once you make a change or post a new place, it will probably not exist in the next request because knative spun up a new instance.
+
+Need to add a database or so to persist data.
