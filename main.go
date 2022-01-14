@@ -33,7 +33,7 @@ func main() {
 }
 
 func healthCheck(c *gin.Context) {
-	status := "OK"
+	status := "Very Happy!"
 	c.IndentedJSON(http.StatusOK, status)
 }
 
