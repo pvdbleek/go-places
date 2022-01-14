@@ -49,6 +49,12 @@ NAME        READY   URL
 go-places   Ready   http://go-places.default.192.168.64.6.nip.io
 ```
 
+The repo also has a `catalog.yaml` which can be registered in your TAP GUI Catalogs.
+When TAP GUI asks for the Repository URL, simply paste this and hit analyze:
+
+```
+https://github.com/pvdbleek/go-places/blob/main/catalog-info.yaml
+```
 ### Using the API
 
 The API has a the following endpoints:
