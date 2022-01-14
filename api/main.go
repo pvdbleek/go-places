@@ -27,8 +27,14 @@ func main() {
 	router.GET("/places/:id", getPlaceByID)
 	router.GET("/url/:id", getMapsUrlByID)
 	router.POST("/places", postPlaces)
+	router.GET("/health", healthCheck)
 
 	router.Run("localhost:8080")
+}
+
+func healthCheck(c *gin.Context) {
+	status := "OK"
+	c.IndentedJSON(http.StatusOK, status)
 }
 
 func getPlaces(c *gin.Context) {
