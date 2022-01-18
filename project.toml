@@ -1,0 +1,6 @@
+# project.toml
+[ build ]
+  [[ build.env ]]
+    name="BP_GO_BUILD_IMPORT_PATH"
+    value="github.com/pvdbleek/go-places"
+
