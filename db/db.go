@@ -10,17 +10,17 @@ import (
 )
 
 func Init() *sql.DB {
-	mysqlHost, provided := os.LookupEnv("MYSQL_HOST")
+	mysqlHost, provided := os.LookupEnv("MARIADB_HOST")
 	if !provided {
 		mysqlHost = "localhost"
 	}
-	mysqlUser, provided := os.LookupEnv("MYSQL_USER")
+	mysqlUser, provided := os.LookupEnv("MARIADB_USER")
 	if !provided {
-		log.Fatalf("Environment variable %s is not set", "MYSQL_USER")
+		log.Fatalf("Environment variable %s is not set", "MARIADB_USER")
 	}
-	mysqlPass, provided := os.LookupEnv("MYSQL_PASS")
+	mysqlPass, provided := os.LookupEnv("MARIADB_PASS")
 	if !provided {
-		log.Fatalf("Environment variable %s is not set", "MYSQL_PASS")
+		log.Fatalf("Environment variable %s is not set", "MARIADB_PASS")
 	}
 	config := mysql.Config{
 		User:                 mysqlUser,

@@ -6,7 +6,7 @@ It's mere purpose is to demonstrate how to create a workload written in `golang`
 
 kubectl create secret generic mariadb-secret --from-literal=MARIADB_USER=dbuser --from-literal=MARIADB_PASSWORD=secretpass
 
-kubectl apply -f .
+kubectl apply -f mariadb 
 
 ### Create a workload
 
@@ -15,9 +15,12 @@ Create the workload in TAP:
 ```
 tanzu apps workload create go-places \
      --git-repo https://github.com/pvdbleek/go-places \ 
-     --git-branch main \
+     --git-branch enable_db \
      --type web \
      --label app.kubernetes.io/part-of=go-places \
+     --env "MARIADB_USER=dbuser" \
+     --env "MARIADB_PASS=secretpass" \
+     --evn "MARIADB_HOST=mariadb" \
      --yes
 ```
 
