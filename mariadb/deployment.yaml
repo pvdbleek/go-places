@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+      - image: gcr.io/sys-2b0109it/demo/bitnami/mariadb:latest
+        name: mariadb
+        ports:
+        - containerPort: 3306
+          name: mariadb
+        env:
+        - name: MARIADB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_USER
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_PASSWORD
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "512Mi"
+          limits:
+            cpu: "100m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: mariadb-pv
+          mountPath: /bitnami/mariadb
+        - name: mariadb-dbinit
+          mountPath: "/docker-entrypoint-initdb.d/"
+          readOnly: true
+      volumes:
+      - name: mariadb-pv
+        persistentVolumeClaim:
+          claimName: mariadb-pvc
+      - name: mariadb-dbinit
+        configMap:
+          name: mariadb-dbinit
