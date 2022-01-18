@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-dbinit
+data:
+  db_init.sql: |
+    CREATE DATABASE placesdb;
+
+    USE placesdb;
+
+    CREATE TABLE places (
+        Id INT NOT NULL AUTO_INCREMENT,
+        name VARCHAR(50),
+        country VARCHAR(50),
+        description VARCHAR(50),
+        latitude DOUBLE(18,15),
+        longitude DOUBLE(18,15),
+        PRIMARY KEY(Id)
+    );
+
+    GRANT ALL PRIVILEGES ON placesdb.places TO 'dbuser'@'%' IDENTIFIED by 'secretpass';
+    FLUSH PRIVILEGES;
+
+    INSERT INTO places (name, country, description, latitude, longitude) values("Darvaza Gas Crater","Turkmenistan","Also known as the Gate to Hell.",40.252605604792635,58.439763430286064);
+    INSERT INTO places (name, country, description, latitude, longitude) values("The Great Wall","China","One of the ancient wonders of the world.",40.4324742310965,116.56400733368996);
+    INSERT INTO places (name, country, description, latitude, longitude) values("Heaven's Gate","China","A stairway to heaven on Tianmen Mountain.",29.053743429510085,110.48154034958873);
