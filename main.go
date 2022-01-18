@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-places/controllers"
+	"github.com/pvdbleek/go-places/controllers"
 
 	"github.com/gin-gonic/gin"
 )
