@@ -20,7 +20,7 @@ tanzu apps workload create go-places \
      --label app.kubernetes.io/part-of=go-places \
      --env "MARIADB_USER=dbuser" \
      --env "MARIADB_PASS=secretpass" \
-     --evn "MARIADB_HOST=mariadb" \
+     --env "MARIADB_HOST=mariadb" \
      --yes
 ```
 
