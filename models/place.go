@@ -5,6 +5,6 @@ type Place struct {
 	Name string
 	Ctry string
 	Desc string
-	Lat  float64
-	Lon  float64
+	Lat  string
+	Lon  string
 }

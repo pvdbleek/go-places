@@ -3,25 +3,30 @@
 This is probably one of the most useless API's there is, but it's not intended to be useful. 
 It's mere purpose is to demonstrate how to create a workload written in `golang` in Tanzu Application Platform.
 
+### Deploy the back-end database
 
-kubectl create secret generic mariadb-secret --from-literal=MARIADB_USER=dbuser --from-literal=MARIADB_PASSWORD=secretpass
+We'll use an image from the VMware Application Catalog:
+[MariaDB packaged by VMware](https://tac.bitnami.com/apps/158b6299c514cae9f673ba80ff08542b4d87b8bf)
 
-kubectl apply -f mariadb 
 
+```
+kubectl create secret generic mariadb-secret \
+  --from-literal=MARIADB_USER=dbuser\
+  --from-literal=MARIADB_PASSWORD=secretpass
+```
+
+```
+kubectl apply -f https://raw.githubusercontent.com/pvdbleek/go-places/main/mariadb/pvc.yaml
+kubectl apply -f https://raw.githubusercontent.com/pvdbleek/go-places/main/mariadb/configmap.yaml
+kubectl apply -f https://raw.githubusercontent.com/pvdbleek/go-places/main/mariadb/deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/pvdbleek/go-places/main/mariadb/service.yaml
+```
 ### Create a workload
 
 Create the workload in TAP:
 
 ```
-tanzu apps workload create go-places \
-     --git-repo https://github.com/pvdbleek/go-places \ 
-     --git-branch enable_db \
-     --type web \
-     --label app.kubernetes.io/part-of=go-places \
-     --env "MARIADB_USER=dbuser" \
-     --env "MARIADB_PASS=secretpass" \
-     --env "MARIADB_HOST=mariadb" \
-     --yes
+tanzu apps workload create go-places --git-repo https://github.com/pvdbleek/go-places --git-branch main --type web --label app.kubernetes.io/part-of=go-places --env "MARIADB_USER=dbuser" --env "MARIADB_PASS=secretpass" --env "MARIADB_HOST=mariadb" --yes
 ```
 
 Watch it build and deploy:
@@ -70,19 +75,21 @@ The API has a the following endpoints:
 | Endpoint     | Method      | Description                                |
 | ------------ | ----------- | ------------------------------------------ |
 | /places      | GET         | Fetches all places                         |
-| /places/{id} | GET         | Fetches a specific place                   |
+| /place/{id}  | GET         | Fetches a specific place                   |
 | /places      | POST        | Add/replace a place                        |
 | /url/{id}    | GET         | Generates a Google Maps URL for this place |
 
 ### Example POST
 
 ```
-curl http://go-places.default.192.168.64.6.nip.io/places \
+curl http://go-places.default.bleekie.tk/api/v1/place \
     --include \
     --header "Content-Type: application/json" \
     --request "POST" \
-    --data '{"id": "3","name": "Heaven's Gate","country": "China","description": "A stairway to heaven on Tianmen Mountain","latitude": 29.053743429510085,"longitude": 110.48154034958873}'
+    --data '{"name": "Santa Clause Village","country": "Finland","description": "This is where Santa really lives.","latitude": 66.543733961877220,"longitude": 25.847250943083463}'
 ```
+66.543733961877220, 25.847250943083463
+
 
 ## Known issue(s)
 

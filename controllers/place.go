@@ -119,9 +119,8 @@ func GetPlaceUrl(c *gin.Context) {
 			"result": place,
 		}
 	}
-	UrlLat := strconv.FormatFloat(place.Lat, 'f', -1, 64)
-	UrlLon := strconv.FormatFloat(place.Lon, 'f', -1, 64)
-	Url := "https://maps.google.com/maps?q=" + UrlLat + "," + UrlLon + "&t=k"
+	
+	Url := "https://maps.google.com/maps?q=" + place.Lat + "," + place.Lon + "&t=k"
 	result = gin.H {
 		"result": Url,
 	}
