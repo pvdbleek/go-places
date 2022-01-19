@@ -49,7 +49,7 @@ func CreatePlace(c *gin.Context) {
 	latitude := c.PostForm("latitude")
 	longitude := c.PostForm("longitude")
 
-	fmt.Println(country)
+	fmt.Println(name, country, description, latitude, longitude)
 	//stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
 
 	//if err != nil {
