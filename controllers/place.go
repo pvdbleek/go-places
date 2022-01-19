@@ -125,5 +125,5 @@ func GetPlaceUrl(c *gin.Context) {
 		"result": Url,
 	}
 
-	c.PureJSON(http.StatusOK, result)
+	c.IndentedJSON(http.StatusOK, result)
 }

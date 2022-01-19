@@ -59,7 +59,7 @@ go-places-config-writer-dhpwc-pod   Succeeded   9m12s
 
 Workload Knative Services
 NAME        READY   URL
-go-places   Ready   http://go-places.default.192.168.64.6.nip.io
+go-places   Ready   http://go-places.default.bleekie.tk
 ```
 
 The repo also has a `catalog.yaml` which can be registered in your TAP GUI Catalogs.
