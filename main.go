@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"bytes"
+	//"bytes"
 	"net/http"
 
 	mysql "github.com/go-sql-driver/mysql"
