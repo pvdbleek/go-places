@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	//"bytes"
 	"net/http"
 
 	mysql "github.com/go-sql-driver/mysql"
@@ -13,12 +12,12 @@ import (
 )
 
 type Place struct {
-	Id   int
-	Name string
-	Ctry string
-	Desc string
-	Lat  string
-	Lon  string
+	Id   string
+	Name string `json:"name"`
+	Ctry string `json:"country"`
+	Desc string `json:"description"`
+	Lat  string `json:"latitude"`
+	Lon  string `json:"longitude"`
 }
 
 func main() {
@@ -42,28 +41,22 @@ func SetupRouter() *gin.Engine {
 }
 
 func CreatePlace(c *gin.Context) {
-	// var buffer bytes.Buffer
 	var newPlace Place
+	c.Bind(&newPlace)
+	
+	stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
 
-	fmt.Println(newPlace.Name)
-	//stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
-
-	//if err != nil {
-	//	fmt.Print(err.Error())
-	//}
-	//_, err = stmt.Exec(name, country, description, latitude, longitude)
+	if err != nil {
+		fmt.Print(err.Error())
+	}
+	_, err = stmt.Exec(newPlace.Name, newPlace.Ctry, newPlace.Desc, newPlace.Lat, newPlace.Lon)
     
-	//if err != nil {
-	//	fmt.Print(err.Error())
-	//}
-
-	//buffer.WriteString(name)
-	//buffer.WriteString(" ")
-	//defer stmt.Close()
-	//placename := buffer.String()
+	if err != nil {
+		fmt.Print(err.Error())
+	}
 
 	c.IndentedJSON(http.StatusOK, gin.H{
-		"message": fmt.Sprintf(" %s successfully created"),
+		"message": fmt.Sprintf(" %s successfully created.", newPlace.Name),
 	})
 }
 
@@ -152,11 +145,11 @@ func GetPlaceUrl(c *gin.Context) {
 		"result": Url,
 	}
 
-	c.IndentedJSON(http.StatusOK, result)
+	c.PureJSON(http.StatusOK, result)
 }
 
 func HealthCheck(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{"status": 200, "data": "testing api", "alive": true})
+	c.IndentedJSON(http.StatusOK, gin.H{"health": "OK"})
 }
 
 func Init() *sql.DB {
@@ -185,7 +178,7 @@ func Init() *sql.DB {
 
 	err = db.Ping()
 	checkErr(err)
-	fmt.Printf("Connection successfully")
+	fmt.Printf("DB Connection successful.")
 
 	return db
 }

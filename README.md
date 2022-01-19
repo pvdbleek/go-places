@@ -86,13 +86,5 @@ curl http://go-places.default.bleekie.tk/api/v1/place \
     --include \
     --header "Content-Type: application/json" \
     --request "POST" \
-    --data '{"name": "Santa Clause Village","country": "Finland","description": "This is where Santa really lives.","latitude": 66.543733961877220,"longitude": 25.847250943083463}'
+    --data '{"name": "Santa Clause Village","country": "Finland","description": "This is where Santa really lives.","latitude": "66.543733961877220","longitude": "25.847250943083463"}'
 ```
-66.543733961877220, 25.847250943083463
-
-
-## Known issue(s)
-
-Any POSTs you make are only persisted in memory, so it doesn't run nicely in knative yet. Once you make a change or post a new place, it will probably not exist in the next request because knative spun up a new instance.
-
-Need to add a database or so to persist data.
