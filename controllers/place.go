@@ -3,8 +3,8 @@ package controllers
 import (
 	"bytes"
 	"fmt"
-	"go-places/db"
-	"go-places/models"
+	"github.com/pvdbleek/go-places/db"
+	"github.com/pvdbleek/go-places/models"
 	"net/http"
 	"strconv"
 
