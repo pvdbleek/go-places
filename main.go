@@ -42,7 +42,7 @@ func SetupRouter() *gin.Engine {
 }
 
 func CreatePlace(c *gin.Context) {
-	#var buffer bytes.Buffer
+	// var buffer bytes.Buffer
 	name := c.PostForm("name")
 	country := c.PostForm("country")
 	description := c.PostForm("description")
@@ -50,21 +50,21 @@ func CreatePlace(c *gin.Context) {
 	longitude := c.PostForm("longitude")
 
 	fmt.Println(country)
-	#stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
+	//stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
 
-	#if err != nil {
-	#	fmt.Print(err.Error())
-	#}
-	#_, err = stmt.Exec(name, country, description, latitude, longitude)
+	//if err != nil {
+	//	fmt.Print(err.Error())
+	//}
+	//_, err = stmt.Exec(name, country, description, latitude, longitude)
     
-	#if err != nil {
-	#	fmt.Print(err.Error())
-	#}
+	//if err != nil {
+	//	fmt.Print(err.Error())
+	//}
 
-	#buffer.WriteString(name)
-	#buffer.WriteString(" ")
-	#defer stmt.Close()
-	#placename := buffer.String()
+	//buffer.WriteString(name)
+	//buffer.WriteString(" ")
+	//defer stmt.Close()
+	//placename := buffer.String()
 
 	c.IndentedJSON(http.StatusOK, gin.H{
 		"message": fmt.Sprintf(" %s successfully created"),
