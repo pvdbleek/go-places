@@ -43,13 +43,9 @@ func SetupRouter() *gin.Engine {
 
 func CreatePlace(c *gin.Context) {
 	// var buffer bytes.Buffer
-	name := c.PostForm("name")
-	country := c.PostForm("country")
-	description := c.PostForm("description")
-	latitude := c.PostForm("latitude")
-	longitude := c.PostForm("longitude")
+	var newPlace Place
 
-	fmt.Println(name, country, description, latitude, longitude)
+	fmt.Println(newPlace.Name)
 	//stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
 
 	//if err != nil {
