@@ -28,7 +28,7 @@ spec:
         - name: MARIADB_HOST
           value: mariadb
         - name: JAVA_TOOL_OPTIONS
-        image: index.docker.io/pvdbleek/go-places-default@sha256:d9f1483611f6b0e23428769a7fb1badd058898514e13aa50ecb531a2540df309
+        image: index.docker.io/pvdbleek/go-places-default@sha256:0ab8f3fbaeb846e0879a84300a5fc2867151947f49073d20cfcc84473564a5c7
         name: workload
         resources: {}
         securityContext:
