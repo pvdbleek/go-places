@@ -43,14 +43,14 @@ func SetupRouter() *gin.Engine {
 func CreatePlace(c *gin.Context) {
 	var newPlace Place
 	c.Bind(&newPlace)
-	
+
 	stmt, err := Init().Prepare("insert into places (name, country, description, latitude, longitude) values(?,?,?,?,?);")
 
 	if err != nil {
 		fmt.Print(err.Error())
 	}
 	_, err = stmt.Exec(newPlace.Name, newPlace.Ctry, newPlace.Desc, newPlace.Lat, newPlace.Lon)
-    
+
 	if err != nil {
 		fmt.Print(err.Error())
 	}
@@ -139,9 +139,9 @@ func GetPlaceUrl(c *gin.Context) {
 			"result": place,
 		}
 	}
-	
+
 	Url := "https://maps.google.com/maps?q=" + place.Lat + "," + place.Lon + "&t=k"
-	result = gin.H {
+	result = gin.H{
 		"result": Url,
 	}
 
@@ -149,7 +149,7 @@ func GetPlaceUrl(c *gin.Context) {
 }
 
 func HealthCheck(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{"health": "OK"})
+	c.IndentedJSON(http.StatusOK, gin.H{"health": "passed"})
 }
 
 func Init() *sql.DB {
